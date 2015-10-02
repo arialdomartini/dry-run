@@ -30,13 +30,13 @@ Target "GetTestRunner" (fun _ ->
     ignore(Shell.Exec(@".\tools\Nuget.exe", "install Nunit.Runners -Version \"2.6.4\" -ExcludeVersion -OutputDirectory \"" + testDir + "\""))
 )
 
-Target "Test" (fun _ ->  
+Target "Test" (fun _ ->
     !! ("test/*.Test.dll")
-       |> NUnit (fun p -> 
-            {p with
-             DisableShadowCopy = true;
-             OutputFile = testDir + "TestResults.xml"
-            })
+    |> NUnit (fun p ->
+       {p with
+           DisableShadowCopy = true;
+           OutputFile = testDir + "TestResults.xml"
+       })
 )
 
 // Build order
